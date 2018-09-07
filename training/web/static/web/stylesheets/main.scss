@@ -1,0 +1,16 @@
+@import "../../../../node_modules/bootstrap/scss/bootstrap";
+
+.sign-in-form {
+    margin-top: 32px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 16px;
+
+    label, input, button {
+        display: block;
+    }
+
+    label, button {
+        margin-top: 16px;
+    }
+}
