@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "workspaces": [
+    "training/web/static/web"
+  ],
+  "engines": {
+    "yarn": "1.9.4"
+  },
+  "scripts": {
+    "run-in-web": "yarn workspace training-django-micro-service run",
+    "heroku-postbuild": "yarn run-in-web webpack && yarn run-in-web sass"
+  }
+}

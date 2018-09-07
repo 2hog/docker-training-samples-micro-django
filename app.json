@@ -1,0 +1,26 @@
+{
+  "name": "Amazing Docker Training Micro Service App",
+  "description": "This app is phenomenal.",
+  "repository": "https://github.com/2hog/docker-training-samples-micro-django",
+  "scripts": {
+    "postbuild": "cd training/web/static/web && yarb webpack && yarn sass"
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "env": {
+    "SECRET_Key": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "DISABLE_COLLECTSTATIC": {
+        "description": "We do not want Heroku to run `collectstatuc`",
+        "value": "1"
+    }
+  }
+}

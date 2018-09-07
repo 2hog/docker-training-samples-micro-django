@@ -1,0 +1,14 @@
+{% extends 'web/base.html' %}
+
+{% block title %}Sign into the app{% endblock %}
+
+{% block content %}
+<h1>Sign into this amazing app</h1>
+
+<form class="sign-in-form" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {{ form }}
+    <button class="submit-button btn btn-primary">Sign in</button>
+</form>
+{% endblock %}
