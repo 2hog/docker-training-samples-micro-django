@@ -4,7 +4,7 @@
     "training/web/static/web"
   ],
   "engines": {
-    "yarn": "1.9.4"
+    "yarn": "1.9.2"
   },
   "scripts": {
     "run-in-web": "yarn workspace training-django-micro-service run",
