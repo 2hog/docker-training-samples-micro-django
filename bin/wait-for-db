@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -ex
+
+# Wait for the database to be available
+dockerize \
+    -wait tcp://${POSTGRES_HOST:-postgres}:${POSTGRES_PORT:-5432} \
+    -timeout 20s
+
+# Execute subcommand, wrapping
+exec "$@"
