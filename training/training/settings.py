@@ -129,8 +129,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 GREETING_APP_URL = sec.load('GREETING_APP_URL', 'http://localhost:4567')
-GREETING_APP_USER = 'paris'
-GREETING_APP_PASSWORD = 'kasidiaris'
+GREETING_APP_USER = sec.load('GREETING_APP_USER', 'paris')
+GREETING_APP_PASSWORD = sec.load('GREETING_APP_PASSWORD', 'kasidiaris')
 CONTENT_APP_URL = sec.load('CONTENT_APP_URL', 'http://localhost:5000')
-CONTENT_APP_USER = 'antonis'
-CONTENT_APP_PASSWORD = 'kalipetis'
+CONTENT_APP_USER = sec.load('CONTENT_APP_USER', 'antonis')
+CONTENT_APP_PASSWORD = sec.load('CONTENT_APP_PASSWORD', 'kalipetis')
