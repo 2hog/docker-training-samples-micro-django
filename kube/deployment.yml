@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-training-samples-micro-django
+  labels:
+    app: docker-training-samples-micro-django
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docker-training-samples-micro-django
+  template:
+    metadata:
+      labels:
+        app: docker-training-samples-micro-django
+    spec:
+      containers:
+      - name: docker-training-samples-micro-django
+        image: 2hog/docker-training-samples-micro-django
+        imagePullPolicy: IfNotPresent
+        command: ["./bin/server"]
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+        envFrom:
+          - configMapRef:
+              name: docker-training-samples-micro-django-config
+      initContainers:
+      - name: docker-training-samples-micro-django-wait-for-db
+        image: jwilder/dockerize
+        imagePullPolicy: IfNotPresent
+        command: ["dockerize", "-wait", "tcp://docker-training-samples-postgres:5432", "-timeout", "20s"]
+      - name: docker-training-samples-micro-django-migrate
+        image: 2hog/docker-training-samples-micro-django
+        imagePullPolicy: IfNotPresent
+        command: ["./bin/migrate"]
+        envFrom:
+          - configMapRef:
+              name: docker-training-samples-micro-django-config

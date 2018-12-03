@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: docker-training-samples-micro-django-config
+  labels:
+    app: docker-training-samples-micro-django
+data:
+  DATABASE_URL: "postgres://postgres:password@docker-training-samples-postgres:5432/postgres"
+  POSTGRES_HOST: "docker-training-samples-postgres"
+  POSTGRES_USER: "postgres"
+  POSTGRES_PASSWORD: "password"
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: "postgres"
+  SECRET_KEY: "thisshouldstaysecretforchristssake"
+  GREETING_APP_URL: "http://docker-training-samples-micro-sinatra:4567/"
+  GREETING_APP_USER: "paris"
+  GREETING_APP_PASSWORD: "kasidiaris"
+  CONTENT_APP_URL: "http://docker-training-samples-micro-flask:5000/"
+  CONTENT_APP_USER: "antonis"
+  CONTENT_APP_PASSWORD: "kalipetis"

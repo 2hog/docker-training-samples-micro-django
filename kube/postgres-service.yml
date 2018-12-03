@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: docker-training-samples-postgres
+  labels:
+    app: docker-training-samples-postgres
+spec:
+  type: NodePort
+  ports:
+   - protocol: TCP
+     port: 5432
+     targetPort: 5432
+  selector:
+   app: docker-training-samples-postgres
