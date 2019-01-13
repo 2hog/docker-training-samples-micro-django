@@ -4,3 +4,4 @@ db.sqlite3
 node_modules
 training/web/static/web/dist
 yarn-error.log
+__pycache__

@@ -3,24 +3,17 @@ version: "3.7"
 services:
   web:
     image: 2hog/docker-training-samples-micro-django
-    depends_on:
-      - postgres
-    environment:
-      DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-password}@${POSTGRES_HOST:-postgres}:${POSTGRES_PORT:-5432}/${POSTGRES_DB:-postgres}
-      POSTGRES_HOST: ${POSTGRES_HOST:-postgres}
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
-      POSTGRES_PORT: ${POSTGRES_PORT:-5432}
-      POSTGRES_DB: ${POSTGRES_DB:-postgres}
-      SECRET_KEY: ${SECRET_KEY:-thisshouldstaysecretforchristssake}
-      GREETING_APP_URL: ${GREETING_APP_URL:-http://greeting:4567/}
-      GREETING_APP_USER: ${GREETING_APP_USER:-paris}
-      GREETING_APP_PASSWORD: ${GREETING_APP_PASSWORD:-kasidiaris}
-      CONTENT_APP_URL: ${CONTENT_APP_URL:-http://content:5000/}
-      CONTENT_APP_USER: ${CONTENT_APP_USER:-antonis}
-      CONTENT_APP_PASSWORD: ${CONTENT_APP_PASSWORD:-kalipetis}
     entrypoint: ./bin/wait-for-db
     command: ./bin/migrate-and-serve
+    secrets:
+      - database_url
+      - secret_key
+      - greeting_app_url
+      - greeting_app_user
+      - greeting_app_password
+      - content_app_url
+      - content_app_user
+      - content_app_password
   
   postgres:
     image: postgres:10
@@ -33,4 +26,30 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  postgres_data: {}
+  postgres_data:
+
+secrets:
+  database_url:
+    external: true
+    name: micro-django-database-url
+  secret_key:
+    external: true
+    name: micro-django-secret-key
+  greeting_app_url:
+    external: true
+    name: micro-django-greeting-app-url
+  greeting_app_user:
+    external: true
+    name: micro-django-greeting-app-user
+  greeting_app_password:
+    external: true
+    name: micro-django-greeting-app-password
+  content_app_url:
+    external: true
+    name: micro-django-content-app-url
+  content_app_user:
+    external: true
+    name: micro-django-content-app-user
+  content_app_password:
+    external: true
+    name: micro-django-content-app-password

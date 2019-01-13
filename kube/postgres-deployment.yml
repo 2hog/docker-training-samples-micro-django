@@ -18,9 +18,27 @@ spec:
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432
-          envFrom:
-            - configMapRef:
-                name: postgres-config
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: docker-training-samples-micro-django-secret
+                  key: postgres_user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: docker-training-samples-micro-django-secret
+                  key: postgres_password
+            - name: POSTGRES_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: docker-training-samples-micro-django-secret
+                  key: postgres_port
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: docker-training-samples-micro-django-secret
+                  key: postgres_db
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgredb

@@ -20,11 +20,49 @@ spec:
         imagePullPolicy: IfNotPresent
         command: ["./bin/server"]
         ports:
-        - containerPort: 5000
-          protocol: TCP
-        envFrom:
-          - configMapRef:
-              name: docker-training-samples-micro-django-config
+          - containerPort: 5000
+            protocol: TCP
+        env:
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: database_url
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: secret_key
+          - name: GREETING_APP_URL
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: greeting_app_url
+          - name: GREETING_APP_USER
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: greeting_app_user
+          - name: GREETING_APP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: greeting_app_password
+          - name: CONTENT_APP_URL
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: content_app_url
+          - name: CONTENT_APP_USER
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: content_app_user
+          - name: CONTENT_APP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: content_app_password
       initContainers:
       - name: docker-training-samples-micro-django-wait-for-db
         image: jwilder/dockerize
