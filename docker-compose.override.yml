@@ -16,6 +16,8 @@ services:
       CONTENT_APP_PASSWORD: ${CONTENT_APP_PASSWORD:-kalipetis}
     volumes:
       - .:/usr/src/app
+    ports:
+      - 8000:8000
 
   greeting:
     image: 2hog/docker-training-samples-micro-sinatra
@@ -28,6 +30,13 @@ services:
     environment:
       AUTH_USER: ${CONTENT_APP_USER:-antonis}
       AUTH_PASSWORD: ${CONTENT_APP_PASSWORD:-kalipetis}
+
+  builder:
+    image: node:10.9
+    command: yarn run dev
+    working_dir: /usr/src/app
+    volumes:
+      - ./:/usr/src/app
 
 volumes:
   postgres_data:
