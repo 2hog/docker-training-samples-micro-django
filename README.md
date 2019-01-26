@@ -58,17 +58,17 @@ docker stack deploy -c docker-compose.yml docker-training-samples-micro-django
 
 ```sh
 kubectl create secret generic docker-training-samples-micro-django-secret \
---from-literal=database_url=postgres://postgres:password@postgres:5432/postgres \
---from-literal=postgres_host=postgres \
+--from-literal=database_url=postgres://postgres:password@docker-training-samples-postgres:5432/postgres \
+--from-literal=postgres_host=docker-training-samples-postgres \
 --from-literal=postgres_user=postgres \
 --from-literal=postgres_password=password \
 --from-literal=postgres_port=5432 \
 --from-literal=postgres_db=postgres \
 --from-literal=secret_key=thisshouldstaysecretforchristssake \
---from-literal=greeting_app_url=http://greeting:4567/ \
+--from-literal=greeting_app_url=http://docker-training-samples-sinatra:4567/ \
 --from-literal=greeting_app_user=paris \
 --from-literal=greeting_app_password=kasidiaris \
---from-literal=content_app_url=http://content:5000/ \
+--from-literal=content_app_url=http://docker-training-samples-flask:5000/ \
 --from-literal=content_app_user=antonis \
 --from-literal=content_app_password=kalipetis \
 kubectl apply -f kube/

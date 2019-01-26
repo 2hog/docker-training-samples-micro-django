@@ -68,10 +68,89 @@ spec:
         image: jwilder/dockerize
         imagePullPolicy: IfNotPresent
         command: ["dockerize", "-wait", "tcp://docker-training-samples-postgres:5432", "-timeout", "20s"]
+        env:
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: database_url
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: secret_key
+          - name: GREETING_APP_URL
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: greeting_app_url
+          - name: GREETING_APP_USER
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: greeting_app_user
+          - name: GREETING_APP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: greeting_app_password
+          - name: CONTENT_APP_URL
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: content_app_url
+          - name: CONTENT_APP_USER
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: content_app_user
+          - name: CONTENT_APP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: content_app_password
       - name: docker-training-samples-micro-django-migrate
         image: 2hog/docker-training-samples-micro-django
         imagePullPolicy: IfNotPresent
         command: ["./bin/migrate"]
-        envFrom:
-          - configMapRef:
-              name: docker-training-samples-micro-django-config
+        env:
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: database_url
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: secret_key
+          - name: GREETING_APP_URL
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: greeting_app_url
+          - name: GREETING_APP_USER
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: greeting_app_user
+          - name: GREETING_APP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: greeting_app_password
+          - name: CONTENT_APP_URL
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: content_app_url
+          - name: CONTENT_APP_USER
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: content_app_user
+          - name: CONTENT_APP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: docker-training-samples-micro-django-secret
+                key: content_app_password
