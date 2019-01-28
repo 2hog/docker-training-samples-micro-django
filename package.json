@@ -8,6 +8,7 @@
   },
   "scripts": {
     "run-in-web": "yarn workspace training-django-micro-service run",
-    "heroku-postbuild": "yarn run-in-web webpack && yarn run-in-web sass"
+    "heroku-postbuild": "yarn run-in-web webpack && yarn run-in-web sass",
+    "dev": "yarn && yarn run heroku-postbuild"
   }
 }
