@@ -32,8 +32,8 @@ services:
       AUTH_PASSWORD: ${CONTENT_APP_PASSWORD:-kalipetis}
 
   builder:
-    image: node:10.9
-    command: yarn run dev
+    image: node:10.15
+    command: yarn dev
     working_dir: /usr/src/app
     volumes:
       - ./:/usr/src/app
