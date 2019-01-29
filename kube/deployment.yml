@@ -28,6 +28,11 @@ spec:
               secretKeyRef:
                 name: docker-training-samples-micro-django-secret
                 key: database_url
+          - name: ALLOWED_HOSTS:
+            valueFrom:
+              configMapKeyRef:
+                name: docker-training-samples-micro-django-configmap
+                key: allowed_hosts
           - name: SECRET_KEY
             valueFrom:
               secretKeyRef:

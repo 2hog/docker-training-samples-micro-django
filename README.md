@@ -13,10 +13,12 @@ Implements a single endpoint (`GET /`) which:
 ## Configuration
 
 The Django Sample Microservice accepts configuration via environment variables:
+
 - `POSTGRES_HOST`: The hostname of the Postgres server (default: `postgres`)
 - `POSTGRES_USER`: The Postgres user of the database (default: `postgres`)
 - `POSTGRES_PASSWORD`: The password of the Postgres user(default: `password`)
 - `POSTGRES_PORT`: The port to which the Postgres server listens (default: `5432`)
+- `ALLOWED_HOSTS`: The `Host` header values allowed to be used in this microservice (default: `localhost`)
 - `POSTGRES_DB`: The Postgres database to use (default: `postgres`)
 - `SECRET_KEY`: Secret key used by Django for cookie signing (default: `thisshouldstaysecretforchristssake`)
 - `GREETING_APP_URL`: The host of the greeting service (default: `http://greeting:4567/`)
@@ -57,6 +59,8 @@ docker stack deploy -c docker-compose.yml docker-training-samples-micro-django
 ### Kubernetes
 
 ```sh
+kubectl create secret generic docker-training-samples-micro-django-configmap \
+--from-literal=allowed_hosts="${HOSTNAME}.akalipetis.com"
 kubectl create secret generic docker-training-samples-micro-django-secret \
 --from-literal=database_url=postgres://postgres:password@docker-training-samples-postgres:5432/postgres \
 --from-literal=postgres_host=docker-training-samples-postgres \
@@ -70,7 +74,7 @@ kubectl create secret generic docker-training-samples-micro-django-secret \
 --from-literal=greeting_app_password=kasidiaris \
 --from-literal=content_app_url=http://docker-training-samples-flask:5000/ \
 --from-literal=content_app_user=antonis \
---from-literal=content_app_password=kalipetis \
+--from-literal=content_app_password=kalipetis
 kubectl apply -f kube/
 ```
 
