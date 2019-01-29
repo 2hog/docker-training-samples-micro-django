@@ -14,6 +14,8 @@ services:
       - content_app_url
       - content_app_user
       - content_app_password
+    environment:
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost}
   
   postgres:
     image: postgres:10
